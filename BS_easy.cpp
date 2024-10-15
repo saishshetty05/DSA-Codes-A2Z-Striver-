@@ -23,33 +23,37 @@ public:
 };
 
 // -----------------upper bound------------
-
-
-
-
-class Solution {
-public:
-    // Function to find floor of x
-    // n: size of vector
-    // x: element whose floor is to find
-    int findFloor(vector<long long> &v, long long n, long long x) {
+int upperBound(vector<int>& arr, int n, int x) {
         int low = 0, high = n - 1;
-        int floor = -1;
-        
+        int ans = n;
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            
-            if (v[mid] <= x) {
-                floor = mid;
-                low = mid + 1;  // Look for a potentially larger floor value
+            if (arr[mid] > x) {
+                ans = mid;
+                high = mid - 1;
             } else {
-                high = mid - 1;  // Look in the lower half
+                low = mid + 1;
             }
         }
-        
-        return floor;
+        return ans;
     }
-};
+
+
+//-------------------------------lower bound ------------------------------
+int lowerBound(vector<int>& arr, int n, int x) {
+        int low = 0, high = n - 1;
+        int ans = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;  // to avoid overflow
+            if (arr[mid] >= x) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
 
 // -------------------------------upper bound and lower bound-------------------
 
@@ -103,5 +107,50 @@ public:
         }
         
         return low;
+    }
+};
+
+// --------------------------find the first and last occurence of the element and 
+// --------------------------return index of it using binary search
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int n = nums.size();
+        int lb = lowerBound(nums, n, target);        
+        if (lb == n || nums[lb] != target) {
+            return {-1, -1};
+        }
+        return {lb,  upperBound(nums, n, target) - 1};
+    }
+    int lowerBound(vector<int>& arr, int n, int x) {
+        int low = 0, high = n - 1;
+        int ans = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;  // to avoid overflow
+            if (arr[mid] >= x) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    // Find the position just after the last occurrence of target
+    int upperBound(vector<int>& arr, int n, int x) {
+        int low = 0, high = n - 1;
+        int ans = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] > x) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
     }
 };
