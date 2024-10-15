@@ -101,3 +101,79 @@ class Solution {
                 reverse(nums.begin(),nums.end()); // from start of arr to end of the array 
                 }
         };
+
+// ---------------------------union of two arrays---------------------
+
+
+class Solution{
+    public:
+    vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        //Your code here
+        //return vector with correct order of elements
+        int i=0,j=0;
+        vector<int> arr;
+        
+        while(i<n && j<m)
+        {
+            if(arr1[i]<=arr2[j])
+            {
+                if(arr.size()==0 || arr.back()!=arr1[i]) 
+                {
+                    arr.push_back(arr1[i]);
+                }
+                i++;
+            }
+            else
+            {
+                if(arr.size()==0 || arr.back()!=arr2[j]) 
+                {
+                    arr.push_back(arr2[j]);
+                }
+                j++;
+            }
+        }
+        while(j<m)
+        {
+            if(arr.size()==0 || arr.back()!=arr2[j]) 
+                {
+                    arr.push_back(arr2[j]);
+                }
+                j++;
+        }
+        while(i<n)
+        {
+         if(arr.size()==0 || arr.back()!=arr1[i]) 
+                {
+                    arr.push_back(arr1[i]);
+                }
+                i++;   
+        }
+    }
+};
+//-------------------------move zeros to end-------------------
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int   n=nums.size(),temp=0,j=0;
+        for(int i =0;i<n;i++)
+        {
+            if(nums[i]==0)
+            {
+              i=j;
+              break;
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]!=0)
+            {
+                swap(nums[i],nums[j]);
+                j++;
+            }
+        }
+      
+    }
+};
