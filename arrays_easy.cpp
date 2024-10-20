@@ -198,7 +198,7 @@ public:
 };
 
 
-//---------better approach----------------
+//---------optimal approach----------------
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
