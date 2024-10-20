@@ -177,51 +177,63 @@ public:
       
     }
 };
+//-----------missing number----------------
 
-// --------------------Dutch Flag algorithm--------------------
-//low: represents the rightmost boundary of 0s
-// mid: current element being examined
-// high: represents the leftmost boundary of 2s
-// Three-Way Partitioning:
+// ----------better approach
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+         vector<int> hash(n + 1, 0);
+        for(int i=0;i<n;i++)
+        {
+            hash[nums[i]]=1;
+        }
+        for(int i=0;i<=n;i++)
+        {
+            if(hash[i]==0) return i;
+        }
+        return -1;
+    }
+};
 
-// All elements before low are 0s
-// All elements after high are 2s
-// All elements between low and mid are 1s
+
+//---------better approach----------------
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int N = nums.size();    
+        int XOR1 = 0, XOR2 = 0;
+        for (int i = 0; i < N; i++) {
+            XOR1 ^= nums[i];     
+            XOR2 ^= i;           
+        }
+        XOR2 ^= N;
+        return XOR1 ^ XOR2;
+    }
+};
 
 
-// How it Works:
 
-// When we find 0: swap with low pointer element and increment both low and mid
-// When we find 1: just increment mid
-// When we find 2: swap with high pointer element and decrement high
-
-
-// Time Complexity: O(n) where n is the size of array
-// Space Complexity: O(1) as we're doing it in-place
-
-//
+//////-------------------- find max consecutive 1----------------
 
 class Solution {
 public:
-    void sortColors(vector<int>& nums) {
-        int low =0 , mid=0,high= nums.size() - 1;
-        while(mid<=high)
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int temp=0;
+        int count=0;
+        for(int i=0;i<nums.size();i++)
         {
-            if(nums[mid]==0){
-                        swap(nums[low],nums[mid]);
-                        low++;
-                        mid++;
-                }
-            else if(nums[mid]==1)
+            if(nums[i]==1)
             {
-                mid++;
+                count++;
+                temp=max(temp,count);
             }
             else
             {
-                swap(nums[mid],nums[high]);
-                high--;
+                count=0;
             }
         }
-
+        return temp;
     }
 };
