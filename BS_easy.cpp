@@ -200,7 +200,7 @@ public:
 
 
 
-//------------------ 	Search in Rotated Sorted Array I------/
+//------------------ 	Search in Rotated Sorted Array I (unique elements)------/
 
 class Solution {
 public:
@@ -232,6 +232,78 @@ public:
             }
         }
         
+        return -1;
+    }
+};
+
+
+///------------------Search in Rotated Sorted Array 2(duplicate elements)------/
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size()- 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (nums[mid] == target) {
+                return true;
+            }
+            if(nums[low]==nums[mid] && nums[mid]==nums[high])
+            {
+                low=low+1;
+                high=high-1;
+                continue;
+            }
+            
+            // Left half is sorted
+            if (nums[low] <= nums[mid]) {
+                if (nums[low] <= target && target < nums[mid]) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } 
+            // Right half is sorted
+            else {
+                if (nums[mid] < target && target <= nums[high]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+        }
+        
+        return false;}
+    
+};
+
+//---------------------searching of element in sorted array()-------
+//---------------------using n*logn approach----------- 
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& arr) {
+        int n=arr.size();
+        if(n==1) return arr[0];
+        if(arr[0]!=arr[1]) return arr[0];
+        if(arr[n-1]!=arr[n-2]) return arr[n-1];
+        int low=1,high=n-2;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(arr[mid]!=arr[mid-1] && arr[mid]!=arr[mid+1])
+            {
+                return arr[mid];
+            }
+            if((mid %2 ==1 && arr[mid]==arr[mid-1])|| (mid%2==0 && arr[mid]==arr[mid+1])){
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
         return -1;
     }
 };
