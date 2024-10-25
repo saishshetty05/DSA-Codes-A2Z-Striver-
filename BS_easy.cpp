@@ -279,7 +279,8 @@ public:
 };
 
 //---------------------searching of element in sorted array()-------
-//---------------------using n*logn approach----------- 
+//---------------------Single element in a Sorted Array----------- 
+//------------------------using n*logn approach----------- 
 
 class Solution {
 public:
@@ -305,5 +306,62 @@ public:
             }
         }
         return -1;
+    }
+};
+
+//----------------	
+// ======== Find out how many times has an array been rotated
+
+class Solution {
+  public:
+    int findKRotation(vector<int> &arr) {
+        // Code Here
+        int n=arr.size();
+        int low=0,high=n-1,temp=INT_MAX;
+        while(low<=high)
+        {
+            int mid=(low +high)/2;
+            if(arr[low]<=arr[mid])
+            {
+                temp=min(temp,arr[low]);
+                low=mid+1;
+            }
+            else
+            {
+                temp=min(temp,arr[mid]);
+                high=mid-1;
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]==temp)
+            return i;
+        }
+        return 0;
+    }
+};
+//--------------	Find minimum in Rotated Sorted Array--
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int n=nums.size();
+        int low=0,high=n-1;
+        int temp=INT_MAX;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[low]<=nums[mid])
+            {
+                temp=min(temp,nums[low]);
+                low=mid+1;
+            }
+            else
+        {
+            temp=min(temp,nums[mid]);
+            high=mid-1;
+        }
+        }
+        return temp;
     }
 };
