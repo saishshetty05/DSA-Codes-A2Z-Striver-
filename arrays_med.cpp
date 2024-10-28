@@ -102,3 +102,23 @@ public:
     }
 
 };
+
+	
+//---Print subarray with maximum subarray sum (extended version of above problem)
+class Solution {
+  public:
+    int pairWithMaxSum(vector<int> &nums) {
+        int temp = INT_MIN;
+        
+     
+        for (int i = 0; i < nums.size() - 1; i++) {
+            int sum = nums[i] + nums[i + 1]; 
+            
+            if (sum > temp) {
+                temp = sum;
+            }
+        }
+        
+        return temp;
+    }
+};
