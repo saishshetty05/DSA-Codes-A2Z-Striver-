@@ -237,3 +237,57 @@ public:
         return temp;
     }
 };
+//---------------------	
+// -----------------------Stock Buy and Sell
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int mini = INT_MAX; 
+        int profit = 0;     
+        for (int i = 0; i < prices.size(); i++) {
+            mini = min(mini, prices[i]);
+          int cost = prices[i] - mini;
+            profit = max(profit, cost);
+        }
+        
+        return profit;
+    }
+};
+
+//---------------	
+// ---------------------Majority Element (>n/2 times)
+
+class Solution {
+public:
+    int majorityElement(vector<int>& arr) {
+      int element;
+      int count=0;
+      for(int i=0;i<arr.size();i++)
+      {
+        if(count==0)
+        {
+            element=arr[i];
+            count++;
+        }
+        else if (arr[i]==element)
+        {
+            count++;
+        }
+        else
+        {
+            count--;
+        }
+      }
+      int x=0;
+      for(int i=0;i<arr.size();i++)
+      {
+        if(arr[i]==element) x++;
+      }
+      if(x>(arr.size()/2))
+      {
+        return element;
+      }
+    return 0;
+    }
+};
