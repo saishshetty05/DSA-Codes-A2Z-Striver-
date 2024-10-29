@@ -365,3 +365,29 @@ public:
         return temp;
     }
 };
+
+//-------------------------find the Kth positive element-------------
+
+class Solution {
+public:
+    int smallestDivisor(vector<int>& nums, int threshold) {      
+        int low = 1, high = *max_element(nums.begin(), nums.end());
+        while(low < high) {
+            int mid = low + (high - low) / 2;
+            if(getDivisionSum(nums, mid) <= threshold) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+    
+    int getDivisionSum(vector<int>& arr, int div) {
+        int sum = 0;
+        for(int num : arr) {
+            sum += (num + div - 1) / div;
+        }
+        return sum;
+    }
+};
