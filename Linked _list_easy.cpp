@@ -54,3 +54,31 @@ class Solution {
         return head;
     }
 };
+//-----------insert at end-----------------
+
+class Solution {
+public:
+    Node *insertAtEnd(Node *head, int x) {
+     
+        Node* newNode = new Node(x);
+          
+        Node* curr = head;
+        while (curr->next != nullptr) {
+            curr = curr->next;
+        }
+        curr->next = newNode;
+        
+        return head;
+    }
+};
+//----------Delete Node in a Linked List------------
+
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        ListNode * temp=node->next;
+        node->val=temp->val;
+        node->next=node->next->next;
+        delete temp;
+    }
+};
