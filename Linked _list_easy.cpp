@@ -82,3 +82,60 @@ public:
         delete temp;
     }
 };
+
+//------------Find the length of the linkedlist [learn traversal]-0--
+
+class Solution {
+  public:
+    // Function to count nodes of a linked list.
+    int getCount(struct Node* head) {
+        struct Node*temp=head;
+        int count =0;
+        while(temp!=nullptr)
+        {
+            count++;
+            temp=temp->next;
+        }
+        return count;
+        
+    }
+};
+
+//------------      	Search an element in the LL
+class Solution {
+  public:
+    // Function to count nodes of a linked list.
+    bool searchKey(int n, struct Node* head, int key) {
+        // Code here
+        struct Node* temp=head;
+        while(temp!=nullptr)
+        {
+            if(temp->data==key)
+            {
+                return true;
+               
+            }
+            temp=temp->next;
+        }
+        return false;
+        
+    }
+};
+
+////------------find the middle of the linked list-----------
+
+//-----tortoise hare method
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        return slow;
+    }
+};
