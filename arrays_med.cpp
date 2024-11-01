@@ -122,3 +122,61 @@ class Solution {
         return temp;
     }
 };
+
+// Rearrange Array Elements by Sign
+
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int n=nums.size();
+        int posIndex=0 , negIndex=1;
+        vector <int> temp(n);
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]>0)
+            {
+                temp[posIndex]=nums[i];
+                posIndex+=2;
+            }
+            else
+            {
+                temp[negIndex]=nums[i];
+                negIndex+=2;
+            }
+        }
+        return temp;
+
+    }
+};
+
+// next permutation
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n=nums.size(),index=-1;
+        for(int i=n-2;i>=0;i--)
+        {
+            if(nums[i]<nums[i+1])
+            {
+                index=i;
+                break;
+            }
+
+        }
+        if(index==-1)
+        {
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            if(nums[i]>nums[index])
+            {
+                swap(nums[i],nums[index]);
+                break;
+            }
+        }
+        reverse(nums.begin()+index+1,nums.end());
+    }
+};
