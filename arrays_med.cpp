@@ -180,3 +180,30 @@ public:
         reverse(nums.begin()+index+1,nums.end());
     }
 };
+// -------------------longest consecutive sequence-----------
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int n=nums.size();
+        if(n==0) return 0;
+        sort(nums.begin(),nums.end());
+        int last_smaller=INT_MIN;
+        int longest=1,count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]-1==last_smaller)
+            {
+                count+=1;
+                last_smaller=nums[i];
+            }
+            else if(last_smaller!=nums[i])
+            {
+                count=1;
+                last_smaller=nums[i];
+            }
+            longest=max(longest,count);
+        }
+        return longest ;
+    }
+};
