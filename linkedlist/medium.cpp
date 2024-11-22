@@ -22,3 +22,56 @@ public:
         return false;
     }
 };
+
+//---------- Lenth of loop in linkedlist -------------------
+
+//-----------brute
+class Solution {
+public:
+    // Function to find the length of a loop in the linked list.
+    int countNodesinLoop(Node *head) {
+        // Code here
+        map<Node*, int> mapp;
+        int timer = 1;
+        Node* temp = head;
+        
+        while(temp != nullptr) {
+            if(mapp.find(temp) != mapp.end()) {
+                int value = mapp[temp];
+                return timer - value;
+            }
+            mapp[temp] = timer;
+            timer++;
+            temp = temp->next;
+        }
+        return 0;
+    }
+};
+
+//------optimal
+class Solution {
+  public:
+    // Function to find the length of a loop in the linked list.
+    int lengthofll(Node* slow,Node* fast){
+        int count=1;
+        fast=fast->next;
+        while(slow!=fast){
+            count++;
+            fast=fast->next;
+        }
+        return count;
+    }
+    int countNodesinLoop(Node *head) {
+        // Code here
+        Node* slow=head;
+        Node* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        
+            if(slow==fast){
+                return lengthofll(slow,fast);
+            }
+        }
+        return 0;
+    }

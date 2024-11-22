@@ -107,3 +107,28 @@ class Solution {
         return maxlen;
     }
 };
+//--------------------------optimal approach
+class Solution {
+public:
+    int lenOfLongestSubarr(vector<int>& arr, int k) {
+      
+        int i=0,j=0;
+        long long sum=arr[0];
+        int length=0;
+        int n=arr.size();
+        while(j<n){
+            while(i<=j && sum>k){
+                sum-=arr[i];
+                i++;           
+            }
+            if(sum==k){
+                length=max(length,j-i+1);
+            }
+            j++;
+            if(j<n)          
+                sum+=arr[j];
+        }
+        return length;
+        
+    }
+};
