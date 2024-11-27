@@ -75,3 +75,57 @@ class Solution {
         }
         return 0;
     }
+    // -----------reverse a linkedlist -----------
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==nullptr || head->next==nullptr){
+            return head;
+        }
+        ListNode* newhead=reverseList(head->next);
+        ListNode* front=head->next;
+        front->next=head;
+        head->next=nullptr;
+        return newhead;
+    }   
+};
+//-------------palindrome in linkedlist------------
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head==nullptr || head->next==nullptr){
+            return true;
+        }
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast->next!=nullptr && fast->next->next!=nullptr){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* newhead=reverseLL(slow->next);
+        ListNode*first=head;
+        ListNode*second=newhead;
+        while(second!=nullptr){
+            if(first->val!=second->val){
+                reverseLL(newhead);
+                return false;
+            }
+            first=first->next;
+            second=second->next;
+        }
+        reverseLL(newhead);
+        return true;
+
+        
+    }
+    ListNode* reverseLL(ListNode* head){
+        if(head==nullptr || head->next==nullptr){
+            return head;
+        }
+        ListNode*newhead=reverseLL(head->next);
+        ListNode*front=head->next;
+        front->next=head;
+        head->next=nullptr;
+        return newhead;
+    }
+};
